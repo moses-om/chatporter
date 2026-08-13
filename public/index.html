@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatPorter — ChatGPT Conversation Extractor</title>
+  <meta name="description" content="Privacy-first in-memory extractor for ChatGPT shared links. Converts conversations into Markdown, Plain Text, and JSON with zero tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Clean Ambient Background -->
+  <div class="light-ambient-bg"></div>
+
+  <!-- Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">📦</div>
+        <div>
+          <h1 class="logo-title">ChatPorter</h1>
+          <p class="logo-subtitle">In-Memory ChatGPT Conversation Extractor</p>
+        </div>
+      </div>
+      <div class="privacy-badge">
+        <span class="badge-dot"></span>
+        <span>100% In-Memory RAM • Zero Digital Footprint • No DB</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="app-main">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-badge">TurboStream In-Memory Engine</div>
+      <h2 class="hero-heading">Extract & Convert ChatGPT Shared Links</h2>
+      <p class="hero-desc">
+        Bypasses client-side hydration hurdles using native pointer-graph deserialization in RAM. Converts complex shared links into clean Markdown, Plain Text, and JSON in under 1 second.
+      </p>
+
+      <!-- Main Input Card -->
+      <form id="extractForm" class="extract-form">
+        <div class="input-wrapper">
+          <span class="input-icon">🔗</span>
+          <input 
+            type="url" 
+            id="urlInput" 
+            placeholder="Paste your ChatGPT share link (e.g. https://chatgpt.com/share/...)" 
+            required 
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button type="button" id="pasteBtn" class="btn-paste" title="Paste from clipboard">
+            📋 Paste
+          </button>
+        </div>
+        <button type="submit" id="extractBtn" class="btn-primary">
+          <span class="btn-text">Extract Chat</span>
+          <span class="btn-icon">➔</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Loading Stepper Section -->
+    <section id="loadingSection" class="loading-section hidden">
+      <div class="loader-spinner"></div>
+      <div class="loading-stepper">
+        <div class="step step-active" id="step1">
+          <span class="step-num">1</span>
+          <span class="step-label">Direct Fetch</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step2">
+          <span class="step-num">2</span>
+          <span class="step-label">TurboStream Decoding</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step3">
+          <span class="step-num">3</span>
+          <span class="step-label">Formatting Turns</span>
+        </div>
+      </div>
+      <p id="loadingStatusText" class="loading-status-text">Connecting to in-memory streaming engine...</p>
+    </section>
+
+    <!-- Error Alert Banner -->
+    <section id="errorSection" class="error-section hidden">
+      <div class="error-icon">⚠️</div>
+      <div class="error-content">
+        <h3 class="error-title">Extraction Error</h3>
+        <p id="errorMessage" class="error-message"></p>
+      </div>
+      <button id="dismissErrorBtn" class="btn-close">✕</button>
+    </section>
+
+    <!-- Results Section -->
+    <section id="resultsSection" class="results-section hidden">
+      <!-- Conversation Summary Card -->
+      <div class="results-card">
+        <div class="results-top-row">
+          <div class="title-meta-group">
+            <div class="badges-row">
+              <span id="platformBadge" class="platform-badge gpt-badge">ChatGPT</span>
+              <span class="badge-status">Extracted in RAM</span>
+            </div>
+            <h2 id="convTitle" class="conv-title">Conversation Title</h2>
+            <div class="conv-meta">
+              <span id="convDate" class="meta-item">📅 Date</span>
+              <span class="meta-dot">•</span>
+              <span id="convTurnsCount" class="meta-item">💬 0 Turns</span>
+              <span class="meta-dot">•</span>
+              <span id="convWordsCount" class="meta-item">📝 0 Words</span>
+              <span class="meta-dot">•</span>
+              <a id="convOriginalLink" href="#" target="_blank" rel="noopener noreferrer" class="meta-link">Open Original Link ↗</a>
+            </div>
+          </div>
+
+          <!-- Multi-Format Export Toolbar -->
+          <div class="export-toolbar">
+            <button id="exportTxtBtn" class="export-btn export-txt">
+              <span class="export-icon">📄</span>
+              <span>Download .TXT</span>
+            </button>
+            <button id="exportMdBtn" class="export-btn export-md">
+              <span class="export-icon">📝</span>
+              <span>Download .MD</span>
+            </button>
+            <button id="exportJsonBtn" class="export-btn export-json">
+              <span class="export-icon">🗂️</span>
+              <span>Download .JSON</span>
+            </button>
+            <button id="copyMdBtn" class="export-btn export-copy">
+              <span class="export-icon">📋</span>
+              <span id="copyBtnText">Copy Markdown</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Controls Bar: Search & Filter Tabs -->
+        <div class="viewer-controls">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search within dialogue turns...">
+            <button id="clearSearchBtn" class="btn-clear hidden">✕</button>
+          </div>
+
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Turns (<span id="allCount">0</span>)</button>
+            <button class="filter-tab" data-filter="user">User (<span id="userCount">0</span>)</button>
+            <button class="filter-tab" data-filter="assistant">ChatGPT (<span id="assistantCount">0</span>)</button>
+          </div>
+        </div>
+
+        <!-- Turns Feed Container -->
+        <div id="turnsFeed" class="turns-feed">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-title">ChatPorter • Privacy Data Pipeline</p>
+      <p class="footer-sub">100% In-Memory Execution • Zero Cookies • Zero Database Logging • Open Source MIT</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden">Copied to clipboard!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

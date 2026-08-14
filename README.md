@@ -143,4 +143,4 @@ Distributed under the **MIT License**. See `LICENSE` for details.
 **Moses Otieno Omondi**  
 - Portfolio: [https://mosesomondi.dev](https://mosesomondi.dev)  
 - GitHub: [@moses-om](https://github.com/moses-om)  
-- LinkedIn: [Moses Otieno Omondi](https://linkedin.com/in/moses-omondi)
+- LinkedIn: [Moses Omondi](https://linkedin.com/in/mosesomondi-om)

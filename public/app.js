@@ -123,7 +123,7 @@ async function handleExtract(url) {
     setLoadingStep(1, 'Connecting to in-memory HTTP stream...');
     await new Promise((r) => setTimeout(r, 150));
 
-    setLoadingStep(2, 'Decoding TurboStream pointer-graph array...');
+    setLoadingStep(2, 'Decoding in-memory stream directly in RAM...');
 
     const res = await fetch('/api/extract', {
       method: 'POST',
@@ -137,7 +137,7 @@ async function handleExtract(url) {
       throw new Error(data.error || 'Failed to extract conversation.');
     }
 
-    setLoadingStep(3, 'Formatting dialogue turns & code blocks...');
+    setLoadingStep(3, 'Formatting clean dialogue turns & code blocks...');
     await new Promise((r) => setTimeout(r, 200));
 
     currentConversation = data;

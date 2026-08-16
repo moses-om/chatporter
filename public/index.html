@@ -5,9 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ChatPorter — ChatGPT Conversation Extractor</title>
   <meta name="description" content="Privacy-first in-memory extractor for ChatGPT shared links. Converts conversations into Markdown, Plain Text, and JSON with zero tracking.">
+  <meta name="theme-color" content="#0D1B3E">
+
+  <!-- Favicon Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="ChatPorter — ChatGPT Conversation Extractor">
+  <meta property="og:description" content="Privacy-first in-memory extractor for ChatGPT shared links. Converts conversations into Markdown, Plain Text, and JSON with zero tracking.">
+  <meta property="og:image" content="icon-512.png">
+  <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,15 +33,36 @@
   <header class="app-header">
     <div class="header-container">
       <div class="logo-area">
-        <div class="logo-icon">📦</div>
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logoBgNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0D1B3E" />
+                <stop offset="100%" stop-color="#152554" />
+              </linearGradient>
+            </defs>
+            <rect width="44" height="44" rx="12" fill="url(#logoBgNavy)" />
+            <rect x="0.75" y="0.75" width="42.5" height="42.5" rx="11.25" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" />
+            <!-- Chat Card Graphic -->
+            <rect x="9" y="11" width="18" height="14" rx="4" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.65)" stroke-width="1.3" />
+            <line x1="13" y1="15.5" x2="23" y2="15.5" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" />
+            <line x1="13" y1="19.5" x2="19" y2="19.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.7" stroke-linecap="round" />
+            <!-- Fast RAM Export Pipeline Arrow -->
+            <path d="M20 27 L27 27 C29.5 27 31.5 25 31.5 22.5 L31.5 16.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M28.5 19.5 L31.5 16.5 L34.5 19.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Status Energy Dots -->
+            <circle cx="12.5" cy="27.5" r="1.5" fill="#34D399" />
+            <circle cx="16.5" cy="27.5" r="1.5" fill="#60A5FA" />
+          </svg>
+        </div>
         <div>
-          <h1 class="logo-title">ChatPorter</h1>
+          <h1 class="logo-title">Chat<span class="logo-accent">Porter</span></h1>
           <p class="logo-subtitle">In-Memory ChatGPT Conversation Extractor</p>
         </div>
       </div>
       <div class="privacy-badge">
         <span class="badge-dot"></span>
-        <span>100% In-Memory RAM • Zero Digital Footprint • No DB</span>
+        <span>100% RAM Processing • Zero Data Logging • Sub-Second Export</span>
       </div>
     </div>
   </header>
@@ -35,11 +71,13 @@
   <main class="app-main">
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="hero-badge">TurboStream In-Memory Engine</div>
+      <div class="mira-tagline">Inspired by MIRA Intelligence</div>
+      <div class="hero-badge">⚡ Fast & Private In-Memory Engine</div>
       <h2 class="hero-heading">Extract & Convert ChatGPT Shared Links</h2>
-      <p class="hero-desc">
-        Bypasses client-side hydration hurdles using native pointer-graph deserialization in RAM. Converts complex shared links into clean Markdown, Plain Text, and JSON in under 1 second.
-      </p>
+      <div class="hero-desc">
+        <span>Extracts and structures ChatGPT shared links using sub-second in-memory stream decoding.</span>
+        <span>Exports clean Markdown, JSON, or Plain Text directly in RAM with zero digital footprint.</span>
+      </div>
 
       <!-- Main Input Card -->
       <form id="extractForm" class="extract-form">
@@ -75,15 +113,15 @@
         <div class="step-divider"></div>
         <div class="step" id="step2">
           <span class="step-num">2</span>
-          <span class="step-label">TurboStream Decoding</span>
+          <span class="step-label">In-Memory Stream Decoding</span>
         </div>
         <div class="step-divider"></div>
         <div class="step" id="step3">
           <span class="step-num">3</span>
-          <span class="step-label">Formatting Turns</span>
+          <span class="step-label">Formatting Clean Turns</span>
         </div>
       </div>
-      <p id="loadingStatusText" class="loading-status-text">Connecting to in-memory streaming engine...</p>
+      <p id="loadingStatusText" class="loading-status-text">Decoding conversation in volatile RAM...</p>
     </section>
 
     <!-- Error Alert Banner -->
@@ -166,7 +204,7 @@
   <footer class="app-footer">
     <div class="footer-container">
       <p class="footer-title">ChatPorter • Privacy Data Pipeline</p>
-      <p class="footer-sub">100% In-Memory Execution • Zero Cookies • Zero Database Logging • Open Source MIT</p>
+      <p class="footer-sub">100% In-Memory Execution • Zero Cookies • Zero Database Logging • Moses Omondi • Open Source MIT</p>
     </div>
   </footer>
 

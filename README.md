@@ -10,7 +10,7 @@
 
 ## 🎯 Overview
 
-Shared conversation links from ChatGPT rely on client-side streaming hydration using OpenAI's **React Router / TurboStream** pointer-graph serialization. Standard web scrapers and browser extensions either fail completely or require uploading sensitive conversations to third-party cloud servers.
+Shared Chat links from ChatGPT rely on client-side streaming hydration using OpenAI's **React Router / TurboStream** pointer-graph serialization. Standard web scrapers and browser extensions either fail completely or require uploading sensitive conversations to third-party cloud servers.
 
 **ChatPorter** provides an ultra-fast, zero-footprint in-memory extraction engine that:
 1. Performs direct in-memory HTTP stream fetching with browser fingerprint simulation.
@@ -32,7 +32,6 @@ Shared conversation links from ChatGPT rely on client-side streaming hydration u
 ## ✨ Features
 
 - **⚡ Blazing Fast (< 1s)**: Native in-memory deserialization eliminates headless browser latency.
-- **🎨 Polished Light / White Theme**: Modern, high-trust SaaS interface with clean typography and slate accents.
 - **🔍 Real-Time Search & Filtering**: Search across messages or filter by *All Turns*, *User*, or *ChatGPT*.
 - **💻 Syntax-Highlighted Code Blocks**: High-contrast code containers with 1-click **Copy Code** buttons.
 - **📦 Multi-Format Exporter**:
